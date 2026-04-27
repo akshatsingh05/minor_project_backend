@@ -17,7 +17,8 @@ Tampering with any entry breaks the hash chain, making it detectable.
 import hashlib
 import json
 import os
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from typing import Any, Dict, List
 
 
@@ -59,7 +60,7 @@ class AuditLogger:
 
         # Build entry without current_hash first
         entry = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(ZoneInfo("Asia/Kolkata")).isoformat(),
             "action": action,
             "details": details,
             "previous_hash": previous_hash,

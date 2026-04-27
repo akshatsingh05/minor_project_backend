@@ -1,206 +1,35 @@
 [
   {
-    "timestamp": "2026-04-26T20:48:07.212708+00:00",
-    "action": "computation_start",
-    "details": {
-      "operation": "max",
-      "num_values": 35
-    },
-    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-    "current_hash": "ad3874319696741597dfdd341eea5b7eb8ee33823d942b6708eea61cc6795776"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:07.228929+00:00",
+    "timestamp": "2026-04-27T11:22:14.132687+05:30",
     "action": "result_generation",
     "details": {
-      "operation": "max",
-      "result": 139465.0
-    },
-    "previous_hash": "ad3874319696741597dfdd341eea5b7eb8ee33823d942b6708eea61cc6795776",
-    "current_hash": "2f5233ea7ecd1f20c8482f9995d177e580445158fe4c1cc95d959c803ea6c00a"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:20.227081+00:00",
-    "action": "input_submission",
-    "details": {
-      "source": "csv",
       "column": "YearsExperience",
-      "num_rows": 35
-    },
-    "previous_hash": "2f5233ea7ecd1f20c8482f9995d177e580445158fe4c1cc95d959c803ea6c00a",
-    "current_hash": "8d1db605387125dce39e097fb81cbfdef98b05781652047364308c04fb218c3f"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:20.239495+00:00",
-    "action": "encryption",
-    "details": {
-      "num_encrypted": 35
-    },
-    "previous_hash": "8d1db605387125dce39e097fb81cbfdef98b05781652047364308c04fb218c3f",
-    "current_hash": "7ae92f1c249a43c22ff899a87a1d6337a4e233120d330ea7a800635823f5c173"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:20.254412+00:00",
-    "action": "share_generation",
-    "details": {
-      "num_values_shared": 35
-    },
-    "previous_hash": "7ae92f1c249a43c22ff899a87a1d6337a4e233120d330ea7a800635823f5c173",
-    "current_hash": "53ec476307ef3bed8de6611cddc822f3b23d5fe79dd2f77b150fa7cff49d152f"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:20.259844+00:00",
-    "action": "storage",
-    "details": {
-      "action": "csv_dataset_stored",
-      "count": 35
-    },
-    "previous_hash": "53ec476307ef3bed8de6611cddc822f3b23d5fe79dd2f77b150fa7cff49d152f",
-    "current_hash": "d6f862d674c2356082f273291430085d856fd1d81f01d7e954da55054fb7823d"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:20.942845+00:00",
-    "action": "mpc_reconstruction",
-    "details": {
-      "num_values": 35
-    },
-    "previous_hash": "d6f862d674c2356082f273291430085d856fd1d81f01d7e954da55054fb7823d",
-    "current_hash": "a5377d0d0ec9417d86735478f6b71ca1705700175213e8822421a38b50e67b25"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:20.962698+00:00",
-    "action": "computation_start",
-    "details": {
-      "operation": "sum",
-      "num_values": 35
-    },
-    "previous_hash": "a5377d0d0ec9417d86735478f6b71ca1705700175213e8822421a38b50e67b25",
-    "current_hash": "ae468017a0b906f0c2fb790e378716b2999b4ef14c6ed2ee827bf1cfd6e1c60e"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:20.989470+00:00",
-    "action": "result_generation",
-    "details": {
-      "operation": "sum",
-      "result": 220.8
-    },
-    "previous_hash": "ae468017a0b906f0c2fb790e378716b2999b4ef14c6ed2ee827bf1cfd6e1c60e",
-    "current_hash": "c106aac66647887c160f18d2cd533373201485442da5ba95fb33d6f6f6aa2a07"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.029024+00:00",
-    "action": "mpc_reconstruction",
-    "details": {
-      "num_values": 35
-    },
-    "previous_hash": "c106aac66647887c160f18d2cd533373201485442da5ba95fb33d6f6f6aa2a07",
-    "current_hash": "4f6d35503c8a493812d888101435c0a4804d15c2beac60c5b668b8f7fa30e2c6"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.053363+00:00",
-    "action": "computation_start",
-    "details": {
-      "operation": "average",
-      "num_values": 35
-    },
-    "previous_hash": "4f6d35503c8a493812d888101435c0a4804d15c2beac60c5b668b8f7fa30e2c6",
-    "current_hash": "b98690db2f30c54e07c3cbbf772edb697dbbe15d64d445d153d26a0631ab4bed"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.059503+00:00",
-    "action": "result_generation",
-    "details": {
-      "operation": "average",
-      "result": 6.3086
-    },
-    "previous_hash": "b98690db2f30c54e07c3cbbf772edb697dbbe15d64d445d153d26a0631ab4bed",
-    "current_hash": "91a87d5610bab700d5804ce295a1fb0493834eee02af3e0d862ff287fc6239e4"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.103936+00:00",
-    "action": "mpc_reconstruction",
-    "details": {
-      "num_values": 35
-    },
-    "previous_hash": "91a87d5610bab700d5804ce295a1fb0493834eee02af3e0d862ff287fc6239e4",
-    "current_hash": "6d38b12fe37bfded791d5d7f67dd9be8f0db5c2c6e45bea03e57533b026cf3cd"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.129161+00:00",
-    "action": "computation_start",
-    "details": {
-      "operation": "count",
-      "num_values": 35
-    },
-    "previous_hash": "6d38b12fe37bfded791d5d7f67dd9be8f0db5c2c6e45bea03e57533b026cf3cd",
-    "current_hash": "de74d65ef495ee84cff6fa621833671c6b2e67310cf3bf796d382c8c931ee343"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.143722+00:00",
-    "action": "result_generation",
-    "details": {
-      "operation": "count",
-      "result": 35
-    },
-    "previous_hash": "de74d65ef495ee84cff6fa621833671c6b2e67310cf3bf796d382c8c931ee343",
-    "current_hash": "71da1f1c4758af6eed88a76e7275748dabb633971dc9c79aec263c2b9577c292"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.183369+00:00",
-    "action": "mpc_reconstruction",
-    "details": {
-      "num_values": 35
-    },
-    "previous_hash": "71da1f1c4758af6eed88a76e7275748dabb633971dc9c79aec263c2b9577c292",
-    "current_hash": "43b6bf6940e38009834f3a51ec1036fa3f7fbec1bb830e223f1d20193d0d899c"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.207723+00:00",
-    "action": "computation_start",
-    "details": {
-      "operation": "min",
-      "num_values": 35
-    },
-    "previous_hash": "43b6bf6940e38009834f3a51ec1036fa3f7fbec1bb830e223f1d20193d0d899c",
-    "current_hash": "2f733c7630dcfdb471d8709624f9e7235ff5c56e9cb6c02f11355c1feb1b6253"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.230605+00:00",
-    "action": "result_generation",
-    "details": {
-      "operation": "min",
-      "result": 1.1
-    },
-    "previous_hash": "2f733c7630dcfdb471d8709624f9e7235ff5c56e9cb6c02f11355c1feb1b6253",
-    "current_hash": "047256d8f831764b94ba27307c5e7ba4a92ac72151b895bd66e024f9c5967e68"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.278146+00:00",
-    "action": "mpc_reconstruction",
-    "details": {
-      "num_values": 35
-    },
-    "previous_hash": "047256d8f831764b94ba27307c5e7ba4a92ac72151b895bd66e024f9c5967e68",
-    "current_hash": "68a3fb4c3a0621754ebce72d2c9f39d6083d5723a49e86e9f8600dfaa2f816c8"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.289277+00:00",
-    "action": "computation_start",
-    "details": {
-      "operation": "max",
-      "num_values": 35
-    },
-    "previous_hash": "68a3fb4c3a0621754ebce72d2c9f39d6083d5723a49e86e9f8600dfaa2f816c8",
-    "current_hash": "28f84374e9488a6c741de93d8b3a69b2690751fa1eccd63f6972ffeb1b1613d5"
-  },
-  {
-    "timestamp": "2026-04-26T20:48:21.306036+00:00",
-    "action": "result_generation",
-    "details": {
       "operation": "max",
       "result": 13.5
     },
-    "previous_hash": "28f84374e9488a6c741de93d8b3a69b2690751fa1eccd63f6972ffeb1b1613d5",
-    "current_hash": "52dcf3308cd0aaaf2a681266a5d046d773e97c74c514803b179413f107684f2c"
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "current_hash": "d6d046f1722cf9eec17ce6e302bb861566950fa75408e2cbf34bbc80ef531742"
+  },
+  {
+    "timestamp": "2026-04-27T11:22:14.151856+05:30",
+    "action": "computation_start",
+    "details": {
+      "operation": "max",
+      "column": "Salary",
+      "num_values": 35
+    },
+    "previous_hash": "d6d046f1722cf9eec17ce6e302bb861566950fa75408e2cbf34bbc80ef531742",
+    "current_hash": "03328e340e9b95d8999f83804f9b4f24fb3d0f27e4573f9e8bc1b62674a243ba"
+  },
+  {
+    "timestamp": "2026-04-27T11:22:14.169421+05:30",
+    "action": "result_generation",
+    "details": {
+      "column": "Salary",
+      "operation": "max",
+      "result": 139465.0
+    },
+    "previous_hash": "03328e340e9b95d8999f83804f9b4f24fb3d0f27e4573f9e8bc1b62674a243ba",
+    "current_hash": "1f9b99f9b42e9a76fd8fde2844cec9b139effad05b83a3ecc1e494c8f8d42fa5"
   }
 ]
