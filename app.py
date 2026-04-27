@@ -5,6 +5,8 @@ Orchestrates all modules: FE, MPC, Audit Logging, and Data Handling.
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from collections import Counter
+
 import os
 
 from modules.fe_module import FunctionalEncryption
@@ -17,7 +19,8 @@ from modules.data_handler import DataHandler
 # ---------------------------------------------------------------------------
 
 app = Flask(__name__)
-CORS(app)  # Enable cross-origin requests for frontend integration
+CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, origins=["http://localhost:5173"], supports_credentials=True)  # Enable cross-origin requests for frontend integration
 
 # Ensure storage directory exists
 os.makedirs("storage", exist_ok=True)
@@ -26,7 +29,8 @@ os.makedirs("storage", exist_ok=True)
 fe = FunctionalEncryption(key=7)          # FE with linear function y = 7x
 mpc = MPCEngine(num_parties=4)            # 4-party additive secret sharing
 logger = AuditLogger("storage/logs.json")
-handler = DataHandler("storage/data.csv")
+manual_handler = DataHandler("storage/manual_data.csv")
+upload_handler = DataHandler("storage/uploaded_data.csv")
 
 # In-memory store for the latest computation result
 latest_result = {}
@@ -66,7 +70,7 @@ def submit_single():
     logger.log("share_generation", {"encrypted_value": encrypted, "num_shares": len(shares)})
 
     # Persist encrypted value
-    handler.append_value(encrypted)
+    manual_handler.append_value(encrypted)
     logger.log("storage", {"stored_encrypted": encrypted})
 
     return jsonify({"message": "Value submitted and stored successfully"}), 200
@@ -81,14 +85,14 @@ def upload_dataset():
     if "file" not in request.files:
         return jsonify({"error": "No file provided"}), 400
 
-    column = request.form.get("column")
+    column = request.args.get("column") or request.form.get("column")
     if not column:
-        return jsonify({"error": "Query param 'column' is required"}), 400
+        return jsonify({"error": "Column parameter is required"}), 400
 
     csv_file = request.files["file"]
 
     # Parse and validate the CSV
-    values, error = handler.parse_csv(csv_file, column)
+    values, error = upload_handler.parse_csv(csv_file, column)
     if error:
         return jsonify({"error": error}), 400
 
@@ -108,7 +112,7 @@ def upload_dataset():
     logger.log("share_generation", {"num_values_shared": len(encrypted_values)})
 
     # Overwrite storage with new encrypted dataset
-    handler.write_values(encrypted_values)
+    upload_handler.write_values(encrypted_values)
     logger.log("storage", {"action": "csv_dataset_stored", "count": len(encrypted_values)})
 
     return jsonify({"message": f"Dataset uploaded. {len(values)} values processed."}), 200
@@ -127,14 +131,20 @@ def compute():
         return jsonify({"error": "Request body must contain 'operation'"}), 400
 
     operation = body["operation"].strip().lower()
+    source = body.get("source")
     valid_ops = {"sum", "average", "count", "min", "max"}
     if operation not in valid_ops:
         return jsonify({"error": f"operation must be one of {sorted(valid_ops)}"}), 400
 
     # Load encrypted values from storage
-    encrypted_values = handler.load_values()
+    if source == "manual":
+        encrypted_values = manual_handler.load_values()
+    elif source == "upload":
+        encrypted_values = upload_handler.load_values()
+    else:
+        return jsonify({"error": "Invalid data source"}), 400
     if not encrypted_values:
-        return jsonify({"error": "No data found. Please submit values first."}), 400
+        return jsonify({"error": f"No data found for {source}. Please submit values first."}), 400
 
     logger.log("mpc_reconstruction", {"num_values": len(encrypted_values)})
 
@@ -157,7 +167,11 @@ def compute():
 
     logger.log("result_generation", {"operation": operation, "result": result_value})
 
-    return jsonify({"operation": operation, "result": result_value}), 200
+    return jsonify({
+        "operation": operation,
+        "result": result_value,
+        "chart": freq_data
+    }), 200
 
 
 @app.route("/results", methods=["GET"])
@@ -193,19 +207,43 @@ def _aggregate(values: list, operation: str) -> float:
         return round(max(values), 4)
 
 
-def _frequency_distribution(values: list) -> dict:
+def _frequency_distribution(values):
     """
     Build a simple frequency distribution over rounded integer buckets.
     Returns {"values": [...], "frequency": [...]} suitable for bar/pie charts.
     """
     from collections import Counter
-    rounded = [round(v) for v in values]
-    counts = Counter(sorted(rounded))
-    return {
-        "values": list(counts.keys()),
-        "frequency": list(counts.values()),
-    }
 
+def _frequency_distribution(values):
+    if not values:
+        return {"values": [], "frequency": []}
+
+    min_val = min(values)
+    max_val = max(values)
+    range_val = max_val - min_val
+
+    # Decide grouping strategy based on data spread
+    if range_val < 50:
+        base = 1
+    elif range_val < 500:
+        base = 10
+    elif range_val < 5000:
+        base = 100
+    elif range_val < 50000:
+        base = 1000
+    else:
+        base = 10000   # 🔥 for salary
+
+    # Apply rounding
+    rounded_values = [round(v / base) * base for v in values]
+
+    counts = Counter(rounded_values)
+    sorted_items = sorted(counts.items())
+
+    return {
+        "values": [item[0] for item in sorted_items],
+        "frequency": [item[1] for item in sorted_items]
+    }
 
 # ---------------------------------------------------------------------------
 # Entry Point
